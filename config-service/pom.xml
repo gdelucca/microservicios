@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.config.service</groupId>
-	<artifactId>config-servicce</artifactId>
+	<artifactId>config-service</artifactId>
 	<version>1.0</version>
-	<name>config-servicce</name>
-	<description>Demo project for Spring Boot</description>
+	<name>config-service</name>
+	<description>Demo</description>
 	<url/>
 	<licenses>
 		<license/>

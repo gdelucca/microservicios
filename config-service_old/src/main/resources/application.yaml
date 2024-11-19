@@ -3,10 +3,11 @@ server:
 spring:
   cloud:
     config:
-      server: 
-        git:
+      server:
+        git: 
           default-label: config-server
           uri: https://github.com/gdelucca/microservicios
           search-paths: config-data
   application:
     name: config-service
+ 
