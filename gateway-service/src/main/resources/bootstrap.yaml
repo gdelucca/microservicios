@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name: getway-service
+    name: gateway-service
   cloud:
     config:
       enabled: true
