@@ -5,7 +5,9 @@ spring:
     config:
       server: 
         git:
-          default-label: instances
+#         default-label: config-servie
+#         default-label: instances
+          default-label: gateway
           uri: https://github.com/gdelucca/microservicios
           search-paths: config-data
   application:
