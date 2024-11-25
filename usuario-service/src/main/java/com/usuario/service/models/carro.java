@@ -22,11 +22,11 @@ public class carro {
 		this.modelo = modelo;
 	}
 
-	public int getUsuarioId() {
+	public int getUsuarioid() {
 		return usuarioid;
 	}
 
-	public void setUsuarioId(int usuarioid) {
+	public void setUsuarioid(int usuarioid) {
 		this.usuarioid = usuarioid;
 	}
 

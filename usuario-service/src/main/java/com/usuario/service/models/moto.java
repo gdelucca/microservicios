@@ -22,11 +22,11 @@ public class moto {
 		return modelo;
 	}
 	
-	public void setUsuarioId(int usuarioid) {
+	public void setUsuarioid(int usuarioid) {
 		this.usuarioid = usuarioid;
 	}
 
-	public int getUsuarioId() {
+	public int getUsuarioid() {
 		return usuarioid;
 	}
 

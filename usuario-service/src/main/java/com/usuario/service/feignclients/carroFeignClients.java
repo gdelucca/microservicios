@@ -1,6 +1,6 @@
 package com.usuario.service.feignclients;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

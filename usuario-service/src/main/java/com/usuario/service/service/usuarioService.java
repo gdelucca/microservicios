@@ -57,13 +57,13 @@ public class usuarioService {
 	}
 	
 	public carro saveCarro (int usuarioid, carro carro) {
-		carro.setUsuarioId(usuarioid);
+		carro.setUsuarioid(usuarioid);
 		carro nuevoCarro = carroFeignClients.save(carro);
 		return nuevoCarro;
 	}
 	
 	public moto saveMoto (int usuarioid, moto moto) {
-		moto.setUsuarioId(usuarioid);
+		moto.setUsuarioid(usuarioid);
 		moto nuevaMoto = motoFeignClients.save(moto);
 		return nuevaMoto;
 	}
