@@ -10,17 +10,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.usuario.service.models.carro;
 
-@FeignClient(name="carro-service",url= "http://localhost:8002")
+/* @FeignClient(name="carro-service",url= "http://localhost:8002") */
 
-@RequestMapping("/carro")
+@FeignClient(name="carro-service")
+
+/*@RequestMapping("/carro")*/
 
 public interface carroFeignClients {
 	
-	@PostMapping()
+	/*@PostMapping()*/
+	
+	@PostMapping("/carro")
 	
 	public carro save(@RequestBody carro carro);
 
-	@GetMapping("/usuario/{usuarioid}")
+	@GetMapping("/carro/usuario/{usuarioid}")
 	
 	public List<carro> getCarros(@PathVariable("usuarioid") int usuarioid);
 		
