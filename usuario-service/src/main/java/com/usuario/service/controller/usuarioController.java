@@ -1,9 +1,10 @@
 package com.usuario.service.controller;
 
-import java.util.List;
+import java.util.List; 
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ import com.usuario.service.entities.usuario;
 import com.usuario.service.models.carro;
 import com.usuario.service.models.moto;
 import com.usuario.service.service.usuarioService;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @RestController
 @RequestMapping("/usuario")
@@ -61,6 +64,7 @@ public class usuarioController {
 		return ResponseEntity.ok(newUser);
 	}
 	
+	@CircuitBreaker(name="carrosCB",fallbackMethod = "fallbackGetCarros")
 	@GetMapping("/carros/{usuarioid}")
 	
 	public ResponseEntity<List<carro>> listarCarros(@PathVariable("usuarioid") int usuarioid) {
@@ -72,6 +76,7 @@ public class usuarioController {
 		return ResponseEntity.ok(carros);
 	}
 
+	@CircuitBreaker(name="motosCB",fallbackMethod = "fallbackGetMotos")
 	@GetMapping("/motos/{usuarioid}")
 	
 	public ResponseEntity<List<moto>> listarMotos(@PathVariable("usuarioid") int usuarioid) {
@@ -83,21 +88,44 @@ public class usuarioController {
 		return ResponseEntity.ok(motos);
 	}
 	
+	@CircuitBreaker(name="carrosCB",fallbackMethod = "fallbackSaveCarro")
 	@PostMapping("/carro/{usuarioid}")
 	public ResponseEntity<carro> guardarCarro (@PathVariable("usuarioid") int usuarioid, @RequestBody carro carro) {
 		carro nuevoCarro = usuarioService.saveCarro(usuarioid, carro);
 		return ResponseEntity.ok(nuevoCarro);
 	}
 	
+	@CircuitBreaker(name="motosCB",fallbackMethod = "fallbackSaveMoto")
 	@PostMapping("/moto/{usuarioid}")
 	public ResponseEntity<moto> guardarMoto (@PathVariable("usuarioid") int usuarioid, @RequestBody moto moto) {
 		moto nuevaMoto = usuarioService.saveMoto(usuarioid, moto);
 		return ResponseEntity.ok(nuevaMoto);
 	}
 	
+	@CircuitBreaker(name="todosCB",fallbackMethod = "fallbackGetTodos")
 	@GetMapping("/todos/{usuarioid}")
 	public ResponseEntity<Map<String, Object>> listarTodosLosVehiculos(@PathVariable("usuarioid") int usuarioid) {
 		Map<String, Object> resultado = usuarioService.getUsuarioAndVehiculos(usuarioid);
 		return ResponseEntity.ok(resultado);
+	}
+	
+	private ResponseEntity<List<carro>> fallbackGetCarros (@PathVariable("usuarioid") int usuarioid,RuntimeException excepcion) {
+		return new ResponseEntity("El usuario: " + usuarioid + " tiene los carros en el taller ", HttpStatus.OK);
+	}
+
+	private ResponseEntity<List<carro>> fallbackSaveCarro (@PathVariable("usuarioid") int usuarioid,  @RequestBody carro carro, RuntimeException excepcion) {
+		return new ResponseEntity("El usuario: " + usuarioid + " no tiene dienero para los carros ", HttpStatus.OK);
+	}
+
+	private ResponseEntity<List<moto>> fallbackGetMotos (@PathVariable("usuarioid") int usuarioid,RuntimeException excepcion) {
+		return new ResponseEntity("El usuario: " + usuarioid + " tiene las motos en el taller ", HttpStatus.OK);
+	}
+
+	private ResponseEntity<List<moto>> fallbackSaveMoto (@PathVariable("usuarioid") int usuarioid,  @RequestBody moto moto, RuntimeException excepcion) {
+		return new ResponseEntity("El usuario: " + usuarioid + " no tiene dienero para las motos ", HttpStatus.OK);
+	}
+
+	private ResponseEntity<List<carro>> fallbackGetTodos (@PathVariable("usuarioid") int usuarioid,RuntimeException excepcion) {
+		return new ResponseEntity("El usuario: " + usuarioid + " tiene los vehiculos en el taller ", HttpStatus.OK);
 	}
 }
