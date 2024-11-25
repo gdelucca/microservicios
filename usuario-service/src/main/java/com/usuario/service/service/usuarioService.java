@@ -1,6 +1,6 @@
 package com.usuario.service.service;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +38,7 @@ public class usuarioService {
 	
 	public List<carro> getCarros(int usuarioid) {
 	    ResponseEntity<List<carro>> response = restTemplate.exchange(
-	    	"http://localhost:8002/carro/usuario/" + usuarioid,
+	    	"http://carro-service/carro/usuario/" + usuarioid,
 	        HttpMethod.GET,
 	        null,
 	        new ParameterizedTypeReference<List<carro>>() {}
@@ -48,7 +48,7 @@ public class usuarioService {
 	
 	public List<moto> getMotos(int usuarioid) {
 	    ResponseEntity<List<moto>> response = restTemplate.exchange(
-	        "http://localhost:8003/moto/usuario/" + usuarioid,
+	        "http://moto-service/moto/usuario/" + usuarioid,
 	        HttpMethod.GET,
 	        null,
 	        new ParameterizedTypeReference<List<moto>>() {}
