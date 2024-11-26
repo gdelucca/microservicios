@@ -40,7 +40,15 @@ resilience4j.circuitbreaker:
         waitDurationInOpenState: 5s
         failureRateThreshold: 50
         eventConsumerBufferSize: 10
+#spring:
+#  application:
+#    zipkin: http://localhost:9412
 spring:
-  application:
-    zipkin: http://localhost:9412
+  zipkin:
+    base-url: http://localhost:9412
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
         

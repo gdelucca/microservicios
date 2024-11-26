@@ -10,6 +10,14 @@ eureka:
     instance:
 #      hostname: localhost
       instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#spring:
+#  application:
+#    zipkin: http://localhost:9412
 spring:
-  application:
-    zipkin: http://localhost:9412
+  zipkin:
+    base-url: http://localhost:9412
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
