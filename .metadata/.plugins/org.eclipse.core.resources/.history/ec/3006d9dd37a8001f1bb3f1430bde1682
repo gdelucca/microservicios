@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: eureka-service
+  cloud:
+    config:
+      enabled: false
+      uri: http://localhost:8081
+# server:
+#  port: 8761
+# eureka:
+#  client:
+#    fetch-registry: false
+#    register-with-eureka: false
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka

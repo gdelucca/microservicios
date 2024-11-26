@@ -8,7 +8,8 @@ spring:
 #         default-label: config-servie
 #         default-label: instances
 #         default-label: gateway
-          default-label: circuit-breaker
+#         default-label: circuit-breaker
+          default-label: zipkin-sleuth
           uri: https://github.com/gdelucca/microservicios
           search-paths: config-data
   application:
